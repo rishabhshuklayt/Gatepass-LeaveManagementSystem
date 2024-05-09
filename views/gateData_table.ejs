@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Include DataTables Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.css">
+</head>
+<body>
+    <!-- Your HTML content here -->
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Roll-no</th>
+                <th>Leave Type</th>
+                <th>Half Day</th>
+                <th>Start Date</th>
+                <th>End date</th>
+                <th>Reason</th>
+                <th>status</th>
+                        
+            </tr>
+        </thead>
+        <tbody>
+            <% requests.forEach(request => { %>
+                <tr>
+                    <td><%= request.fname %></td>
+                    <td><%= request.rollno %></td>
+                    <td><%= request.leaveType %></td>
+                    <td><%= request.halfDay %></td>
+                    <td><%= request.startDate %></td>
+                    <td><%= request.endDate %></td>
+                    <td><%= request.reason %></td>
+                    <td><%= request.status %></td>
+                </tr>
+            <% }); %>
+        </tbody>    
+
+
+        <!-- <script>
+            // Function to submit the form and reload the page
+            function submitFormAndReload() {
+                // Submit the form
+                document.getElementById('rejectForm').submit();
+                // Reload the page after a short delay
+                setTimeout(() => {
+                    location.reload();
+                }, 1000); // 1000 milliseconds = 1 second
+            }
+        </script> -->
+        <script>
+        
+        $('#example').DataTable( {
+            responsive: true
+        } );
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- Include Bootstrap JavaScript (with Popper.js) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Include DataTables JavaScript -->
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+    <!-- Include DataTables Bootstrap 5 JavaScript -->
+    <script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
+    <!-- Include Additional JavaScript -->
+    <script src="path/to/your/additional/script.js"></script>
+</body>
+</html>
