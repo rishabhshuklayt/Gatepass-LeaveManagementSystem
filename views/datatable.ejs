@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Include DataTables Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.bootstrap5.css">
+     <!-- ===== Boxicons CSS ===== -->
+     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    
+    <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        data-mdb-collapse-init
+        class="navbar-toggler"
+        type="button"
+        data-mdb-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+            height="15"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="">Homepage</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout_coordinator">Add coordinator</a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+  
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+        <!-- Icon -->
+        <a class="text-reset me-3" href="#">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+  
+        <!-- Notifications -->
+        <div class="dropdown">
+          <a
+            data-mdb-dropdown-init
+            class="text-reset me-3 dropdown-toggle hidden-arrow"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bell"></i>
+            <span class="badge rounded-pill badge-notification bg-danger">1</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <li>
+              <a class="dropdown-item" href="#">Some news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Another news</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Avatar -->
+       <a  href="/coordinator_login"> <button  href="/coordinator_login">logout</button></a>
+      </div>
+      <!-- Right elements -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar end-->
+
+    <!-- Your HTML content here -->
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Student</th>
+                <th>Roll-no</th>
+                <th>Leave Type</th>
+                <th>Half Day</th>
+                <th>Start Date</th>
+                <th>End date</th>
+                <th>Reason</th>
+                <th>status</th>
+                <th>operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% requests.forEach(request => { %>
+                <tr>
+                    <td><%= request.fname %></td>
+                    <td><%= request.rollno %></td>
+                    <td><%= request.leaveType %></td>
+                    <td><%= request.halfDay %></td>
+                    <td><%= request.startDate %></td>
+                    <td><%= request.endDate %></td>
+                    <td><%= request.reason %></td>
+                    <td><%= request.status %></td>
+                    
+                    
+                    <td>
+                        <form action="/acceptLeaveRequest" method="post">
+                            <!-- <input type="text" name="status" value="Approved" hidden> -->
+                            <input type="hidden" name="requestId" value="<%= request._id %>">
+                            <input type="hidden" name="email" value="<%= request.email %>">
+                        <button type="submit" class="btn btn-primary" ><img width="30" height="30" src="https://img.icons8.com/ios-filled/50/40C057/checked--v1.png" alt="checked--v1"/></button>
+                    </form>
+                        <!-- <button>reject</button> -->
+                        <form action="/rejectLeaveRequest" method="POST">
+                            <input type="hidden" name="requestId" value="<%= request._id %>">
+                            <button type="submit" ><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50"
+                                style="fill:#FA5252;">
+                                <path d="M25,2C12.319,2,2,12.319,2,25s10.319,23,23,23s23-10.319,23-23S37.681,2,25,2z M33.71,32.29c0.39,0.39,0.39,1.03,0,1.42	C33.51,33.9,33.26,34,33,34s-0.51-0.1-0.71-0.29L25,26.42l-7.29,7.29C17.51,33.9,17.26,34,17,34s-0.51-0.1-0.71-0.29	c-0.39-0.39-0.39-1.03,0-1.42L23.58,25l-7.29-7.29c-0.39-0.39-0.39-1.03,0-1.42c0.39-0.39,1.03-0.39,1.42,0L25,23.58l7.29-7.29	c0.39-0.39,1.03-0.39,1.42,0c0.39,0.39,0.39,1.03,0,1.42L26.42,25L33.71,32.29z"></path>
+                                </svg></button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>    
+
+
+        <!-- <script>
+            // Function to submit the form and reload the page
+            function submitFormAndReload() {
+                // Submit the form
+                document.getElementById('rejectForm').submit();
+                // Reload the page after a short delay
+                setTimeout(() => {
+                    location.reload();
+                }, 1000); // 1000 milliseconds = 1 second
+            }
+        </script> -->
+
+      
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- Include Bootstrap JavaScript (with Popper.js) -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> -->
+    <!-- Include DataTables JavaScript -->
+    <!-- <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script> -->
+    <!-- Include DataTables Bootstrap 5 JavaScript -->
+    <!-- <script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script> -->
+    <!-- Include Additional JavaScript -->
+    <!-- <script src="path/to/your/additional/script.js"></script> -->
+
+
+    <!-- --------------------rearranged---------- -->
+
+    <!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+<!-- Include Bootstrap JavaScript (with Popper.js) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- Include DataTables JavaScript -->
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
+
+<!-- Include DataTables Bootstrap 5 JavaScript -->
+<script src="https://cdn.datatables.net/2.0.2/js/dataTables.bootstrap5.js"></script>
+
+<!-- Your additional JavaScript -->
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+</body>
+</html>
